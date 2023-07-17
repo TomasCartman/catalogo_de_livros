@@ -4,6 +4,7 @@
     margin: 30px auto 20px auto;
     border: solid 1px black;
     padding: 20px;
+    box-shadow: 1px 1px 3px 0px #000;
 }
 
 .formcontainer {

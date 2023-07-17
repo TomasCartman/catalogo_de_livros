@@ -16,47 +16,56 @@ const bookList = [
     {
         'title': 'O mistério Sittaford',
         'gender': 'Mistério',
-        'author': 'Agatha Christie'
+        'author': 'Agatha Christie',
+        'rate': 5
     },
     {
         'title': 'O misterioso caso de styles',
         'gender': 'Mistério',
-        'author': 'Agatha Christie'
+        'author': 'Agatha Christie',
+        'rate': 4.5
     },
     {
         'title': 'O inimigo secreto',
         'gender': 'Mistério',
-        'author': 'Agatha Christie'
+        'author': 'Agatha Christie',
+        'rate': 4
     },
     {
         'title': 'Os quatro grandes',
         'gender': 'Mistério',
-        'author': 'Agatha Christie'
+        'author': 'Agatha Christie',
+        'rate': 2.5
     },
     {
         'title': 'Antes que ele precise - Um enigma Mackinzie White',
         'gender': 'Mistério',
-        'author': 'Blake Pierce'
+        'author': 'Blake Pierce',
+        'rate': 3.5
     },
     {
         'title': 'Assassinato no campo de golfe',
         'gender': 'Mistério',
-        'author': 'Agatha Christie'
+        'author': 'Agatha Christie',
+        'rate': 3
     },
     {
         'title': 'Guia Suno de contabilidade para investidores',
         'gender': 'Contabilidade',
-        'author': 'Jean Tosetto'
+        'author': 'Jean Tosetto',
+        'rate': 1.5
     },
     {
         'title': 'A espada do destino',
         'gender': 'Fantasia',
-        'author': 'Andrzej Sapkowski'
+        'author': 'Andrzej Sapkowski',
+        'rate': 5
     },
     {
         'title': 'O misterioso Sr. Quin',
         'gender': 'Mistério',
-        'author': 'Agatha Christie'
+        'author': 'Agatha Christie',
+        'rate': 2.5
     }
 ]
 
@@ -71,6 +80,7 @@ export default function Index() {
             title={book.title}
             gender={book.gender}
             author={book.author}
+            rate={book.rate}
         />
     }
 
