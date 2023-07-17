@@ -16,7 +16,7 @@ export default function addBook() {
             </Head>
             <header>
                 <NavBar toggleDropdown={toggleDropdownVisibility}>Catálogo_de_livros</NavBar>
-                <DropdownMenu hideDropdown={isDropdownHide}>
+                <DropdownMenu hideDropdown={isDropdownHide} position='header'>
                     <DropdownItem
                         itemLabel='Livros'
                         icon={<FaBook size={20} />}
