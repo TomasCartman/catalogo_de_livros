@@ -1,7 +1,11 @@
 import BookComponent from '@/components/bookComponent/BookComponent'
+import DropdownItem from '@/components/dropdown/DropdownItem'
+import DropdownMenu from '@/components/dropdown/DropdownMenu'
 import NavBar from '@/components/navbar/NavBar'
 import PageUp from '@/components/pageUp/PageUp'
 import '@/styles/globals.css'
+import { FaBook } from 'react-icons/fa'
+import { BiSolidBookAdd } from 'react-icons/bi'
 import styles from '@/styles/index.module.css'
 
 const bookList = [
@@ -60,8 +64,16 @@ export default function Index() {
             </header>
             <main>
                 <PageUp />
+                <DropdownMenu>
+                    <DropdownItem itemLabel='Livros' icon={<FaBook size={20} />} />
+                    <DropdownItem itemLabel='Adicionar Livro' icon={<BiSolidBookAdd size={20} />} />
+                </DropdownMenu>
                 <div className={styles.bookscontainer}>
-                    {bookList}
+                    <h2 className={styles.title}>Livros:</h2>
+                    {bookList.map((value, index) => {
+                        
+                        return value
+                    })}
                 </div>
             </main>
         </>

@@ -1,0 +1,16 @@
+.dropdown  {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: solid 1px black;
+    width: fit-content;
+    background-color: rgba(255, 255, 255, 0.975);
+    position: fixed;
+    right: 15px;
+    top: 60px;
+    padding: 20px 15px;
+}
+
+.dropdown :last-child {
+   display: none;
+}

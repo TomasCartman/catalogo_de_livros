@@ -1,0 +1,14 @@
+.item {
+    list-style-type: none;
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+}
+
+.item:hover {
+    color: var(--hover-primary-color);
+}
+
+.separator {
+    width: 100%;
+}

@@ -5,6 +5,11 @@
   --hover-contrast-color: #ffffffb4;
 }
 
+header {
+  position: sticky;
+  top: 0;
+}
+
 body {
   margin: 0;
 }
