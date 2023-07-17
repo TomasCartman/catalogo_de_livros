@@ -1,6 +1,4 @@
-.formcontainer {
-    display: flex;
-    flex-direction: column;
+.maincontainer {
     margin-top: 40px;
     width: 40%;
     margin: 30px auto 20px auto;
@@ -8,10 +6,72 @@
     padding: 20px;
 }
 
+.formcontainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
 .buttonflex {
     display: flex;
+    width: 100%;
     gap: 6px;
     justify-content: flex-end;
     padding: 10px;
     margin-top: 15px;
+}
+
+.formdiv {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.formjustifystart {
+    justify-self: flex-start;
+}
+
+.input {
+    height: 30px;
+    font-size: 1rem
+}
+
+.label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.titletogglebutton {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.title {
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.switchdiv {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.switchlabel {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.hide {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .formdiv {
+        width: 320px;
+    }
 }

@@ -63,37 +63,52 @@ const bookList = [
 export default function Index() {
     const { getDropdownIsHide, toggleDropdownVisibility } = useDropdownsHide(2)
     const [filter, setFilter] = useState()
-    const [filterDropdownTitle, setFilterDropdownTitle] =  useState('Todos os livros')
+    const [filterDropdownTitle, setFilterDropdownTitle] = useState('Todos os livros')
+
+    const mapBooks = (book, index) => {
+        return <BookComponent
+            key={index}
+            title={book.title}
+            gender={book.gender}
+            author={book.author}
+        />
+    }
 
     function renderBooks(books, filter) {
         if (filter === 'read') {
-
+            const filteredBooks = books.filter(book => book.read === true)
+            if (!filteredBooks.lenght) {
+                return 'Nenhum livro aqui. Adicione novos livros'
+            } else {
+                return filteredBooks.map(mapBooks)
+            }
         } else if (filter === 'notread') {
-
+            const filteredBooks = books.filter(book => book.read === false)
+            if (!filteredBooks.lenght) {
+                return 'Nenhum livro aqui. Adicione novos livros'
+            } else {
+                return filteredBooks.map(mapBooks)
+            }
         } else {
-            return books.map((book, index) => {
-                return <BookComponent
-                    key={index}
-                    title={book.title}
-                    gender={book.gender}
-                    author={book.author}
-                />
-            })
+            return books.map(mapBooks)
         }
     }
 
     function showAllBooks() {
         setFilter('')
+        setFilterDropdownTitle('Todos os Livros')
         toggleDropdownVisibility(1)
     }
 
     function showReadBooksOnly() {
         setFilter('read')
+        setFilterDropdownTitle('Livros Lidos')
         toggleDropdownVisibility(1)
     }
 
     function showNotReadBooksOnly() {
         setFilter('notread')
+        setFilterDropdownTitle('Livros Não Lidos')
         toggleDropdownVisibility(1)
     }
 
@@ -127,7 +142,7 @@ export default function Index() {
                         <DropdownMenu hideDropdown={getDropdownIsHide(1)}>
                             <DropdownItem itemLabel='Todos os livros' onClick={showAllBooks} />
                             <DropdownItem itemLabel='Livros Lidos' onClick={showReadBooksOnly} />
-                            <DropdownItem itemLabel='Livros Não lidos'  onClick={showNotReadBooksOnly} />
+                            <DropdownItem itemLabel='Livros Não lidos' onClick={showNotReadBooksOnly} />
                         </DropdownMenu>
                     </div>
                     <h2 className={styles.title}>{filterDropdownTitle}</h2>
@@ -137,14 +152,3 @@ export default function Index() {
         </>
     )
 }
-
-
-/*
-
-<button
-                            type='button'
-                            className={styles.button}
-                            onClick={() => toggleDropdownVisibility(1)}
-                        >Filtrar</button>
-
-*/
