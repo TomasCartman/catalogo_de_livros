@@ -3,15 +3,11 @@ import DropdownItem from '@/components/dropdown/DropdownItem'
 import DropdownMenu from '@/components/dropdown/DropdownMenu'
 import { FaBook } from 'react-icons/fa'
 import { BiSolidBookAdd } from 'react-icons/bi'
-import { useState } from "react"
+import useDropdownHide from "@/hooks/useDropdownHide"
 import Head from "next/head"
 
 export default function addBook() {
-    const [isDropdownHide, setDropdownHide] = useState(true)
-
-    function toggleDropdownVisibility() {
-        setDropdownHide(!isDropdownHide)
-    }
+    const { isDropdownHide, toggleDropdownVisibility } = useDropdownHide()
 
     return (
         <> 

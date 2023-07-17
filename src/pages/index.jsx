@@ -9,6 +9,7 @@ import { BiSolidBookAdd } from 'react-icons/bi'
 import styles from '@/styles/index.module.css'
 import { useState } from 'react'
 import Head from 'next/head'
+import useDropdownHide from '@/hooks/useDropdownHide'
 
 const bookList = [
     <BookComponent
@@ -59,11 +60,7 @@ const bookList = [
 ]
 
 export default function Index() {
-    const [isDropdownHide, setDropdownHide] = useState(true)
-
-    function toggleDropdownVisibility() {
-        setDropdownHide(!isDropdownHide)
-    }
+    const { isDropdownHide, toggleDropdownVisibility } = useDropdownHide()
 
     return (
         <>
