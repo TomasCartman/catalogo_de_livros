@@ -6,7 +6,6 @@ export default function useDropdownsHide(numberOfDropdowns) {
     const getDropdownIsHide = position => dropdowns[position]
 
     const toggleDropdownVisibility = position => {
-        console.log(position)
         const newDropdownArray = [...dropdowns]
         newDropdownArray[position] = !dropdowns[position]
         setDropdowns([...newDropdownArray])
