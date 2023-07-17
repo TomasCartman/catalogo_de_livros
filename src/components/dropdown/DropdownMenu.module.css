@@ -11,6 +11,10 @@
     padding: 20px 15px;
 }
 
-.dropdown :last-child {
+.dropdown hr:last-child {
    display: none;
+}
+
+.hide {
+    display: none;
 }

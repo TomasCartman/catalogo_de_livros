@@ -7,6 +7,8 @@ import '@/styles/globals.css'
 import { FaBook } from 'react-icons/fa'
 import { BiSolidBookAdd } from 'react-icons/bi'
 import styles from '@/styles/index.module.css'
+import { useState } from 'react'
+import Head from 'next/head'
 
 const bookList = [
     <BookComponent
@@ -57,21 +59,39 @@ const bookList = [
 ]
 
 export default function Index() {
+    const [isDropdownHide, setDropdownHide] = useState(true)
+
+    function toggleDropdownVisibility() {
+        setDropdownHide(!isDropdownHide)
+    }
+
     return (
         <>
+            <Head>
+                <title>Catálogo_de_livros</title>
+            </Head>
             <header>
-                <NavBar>Catálogo_de_livros</NavBar>
+                <NavBar toggleDropdown={toggleDropdownVisibility}>Catálogo_de_livros</NavBar>
+                <DropdownMenu hideDropdown={isDropdownHide}>
+                    <DropdownItem
+                        itemLabel='Livros'
+                        icon={<FaBook size={20} />}
+                        link='/'
+                    />
+                    <DropdownItem
+                        itemLabel='Adicionar Livro'
+                        icon={<BiSolidBookAdd size={20} />}
+                        link='/addBook'
+                    />
+                </DropdownMenu>
             </header>
             <main>
                 <PageUp />
-                <DropdownMenu>
-                    <DropdownItem itemLabel='Livros' icon={<FaBook size={20} />} />
-                    <DropdownItem itemLabel='Adicionar Livro' icon={<BiSolidBookAdd size={20} />} />
-                </DropdownMenu>
+
                 <div className={styles.bookscontainer}>
                     <h2 className={styles.title}>Livros:</h2>
                     {bookList.map((value, index) => {
-                        
+
                         return value
                     })}
                 </div>
