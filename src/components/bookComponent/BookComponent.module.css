@@ -1,0 +1,31 @@
+.bookcontainer {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: antiquewhite;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.gender {
+    margin: 0;
+    font-style: italic;
+}
+
+.authorstars {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.author {
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.stars {
+    display: flex;
+}
