@@ -10,16 +10,3 @@
 .title {
     margin: 0;
 }
-
-.button {
-    border: solid 1px black;
-    text-transform: uppercase;
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: var(--contrast-color);
-    padding: 10px 15px;
-}
-
-.button:hover {
-    color: var(--hover-contrast-color);
-}

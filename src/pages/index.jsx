@@ -10,6 +10,7 @@ import styles from '@/styles/index.module.css'
 import Head from 'next/head'
 import useDropdownsHide from '@/hooks/useDropDownsHide'
 import { useState } from 'react'
+import Button from '@/components/button/Button'
 
 const bookList = [
     {
@@ -120,11 +121,9 @@ export default function Index() {
                 <PageUp />
                 <div className={styles.bookscontainer}>
                     <div>
-                        <button
-                            type='button'
-                            className={styles.button}
-                            onClick={() => toggleDropdownVisibility(1)}
-                        >Filtrar</button>
+                        <Button onClick={() => toggleDropdownVisibility(1)}>
+                            Filtrar
+                        </Button>
                         <DropdownMenu hideDropdown={getDropdownIsHide(1)}>
                             <DropdownItem itemLabel='Todos os livros' onClick={showAllBooks} />
                             <DropdownItem itemLabel='Livros Lidos' onClick={showReadBooksOnly} />
@@ -138,3 +137,14 @@ export default function Index() {
         </>
     )
 }
+
+
+/*
+
+<button
+                            type='button'
+                            className={styles.button}
+                            onClick={() => toggleDropdownVisibility(1)}
+                        >Filtrar</button>
+
+*/

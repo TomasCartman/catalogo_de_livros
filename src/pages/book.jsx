@@ -1,6 +1,9 @@
+import '@/styles/globals.css'
+import styles from '@/styles/book.module.css'
 import NavBar from "@/components/navbar/NavBar"
 import DropdownItem from '@/components/dropdown/DropdownItem'
 import DropdownMenu from '@/components/dropdown/DropdownMenu'
+import Button from '@/components/button/Button'
 import { FaBook } from 'react-icons/fa'
 import { BiSolidBookAdd } from 'react-icons/bi'
 import useDropdownHide from "@/hooks/useDropdownHide"
@@ -30,8 +33,20 @@ export default function addBook() {
                 </DropdownMenu>
             </header>
             <main>
-
-                addBook
+                <div className={styles.formcontainer}>
+                    <label>Título</label>
+                    <input type="text" />
+                    <label>Gênero</label>
+                    <input type="text" />
+                    <label>Autor</label>
+                    <input type="text" />
+                    <label>Nota</label>
+                    <input type="number" step={0.5} min={0} max={5} />
+                    <div className={styles.buttonflex}>
+                        <Button>Adicionar</Button>
+                        <Button contrast>Cancelar</Button>
+                    </div>
+                </div>
             </main>
         </>
 
