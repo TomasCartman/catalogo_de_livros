@@ -1,5 +1,6 @@
 import BookComponent from '@/components/bookComponent/BookComponent'
 import NavBar from '@/components/navbar/NavBar'
+import PageUp from '@/components/pageUp/PageUp'
 import '@/styles/globals.css'
 import styles from '@/styles/index.module.css'
 
@@ -53,11 +54,16 @@ const bookList = [
 
 export default function Index() {
     return (
-        <main>
-            <NavBar>adsasad</NavBar>
-            <div className={styles.bookscontainer}>
-                {bookList}
-            </div>
-        </main>
+        <>
+            <header>
+                <NavBar>Catálogo_de_livros</NavBar>
+            </header>
+            <main>
+                <PageUp />
+                <div className={styles.bookscontainer}>
+                    {bookList}
+                </div>
+            </main>
+        </>
     )
 }

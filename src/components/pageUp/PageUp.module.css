@@ -1,0 +1,20 @@
+.pageup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    border-radius: 100px;
+    right: 10px;
+    bottom: 10px;
+}
+
+.pageup {
+    cursor: pointer;
+}
+
+.pageup:hover {
+    color: var(--hover-contrast-color);
+}

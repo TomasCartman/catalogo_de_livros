@@ -1,5 +1,8 @@
 :root {
-  
+  --primary-color: rgb(0, 0, 0);
+  --hover-primary-color: #4d4d4d;
+  --contrast-color: white;
+  --hover-contrast-color: #ffffffb4;
 }
 
 body {
