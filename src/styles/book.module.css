@@ -76,3 +76,10 @@
         width: 320px;
     }
 }
+
+@media (max-width: 770px) {
+    .maincontainer {
+        width: 80%;
+        margin: 30px auto 20px auto;
+    }
+}

@@ -31,7 +31,7 @@ export default function Book() {
                     <DropdownItem
                         itemLabel='Adicionar Livro'
                         icon={<BiSolidBookAdd size={20} />}
-                        link='/addBook'
+                        link='/book'
                     />
                 </DropdownMenu>
             </header>
