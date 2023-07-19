@@ -15,71 +15,12 @@ import axios from 'axios'
 
 const baseURL = 'api/books'
 
-/*
-const bookList = [
-    {
-        'title': 'O mistério Sittaford',
-        'gender': 'Mistério',
-        'author': 'Agatha Christie',
-        'rate': 5
-    },
-    {
-        'title': 'O misterioso caso de styles',
-        'gender': 'Mistério',
-        'author': 'Agatha Christie',
-        'rate': 4.5
-    },
-    {
-        'title': 'O inimigo secreto',
-        'gender': 'Mistério',
-        'author': 'Agatha Christie',
-        'rate': 4
-    },
-    {
-        'title': 'Os quatro grandes',
-        'gender': 'Mistério',
-        'author': 'Agatha Christie',
-        'rate': 2.5
-    },
-    {
-        'title': 'Antes que ele precise - Um enigma Mackinzie White',
-        'gender': 'Mistério',
-        'author': 'Blake Pierce',
-        'rate': 3.5
-    },
-    {
-        'title': 'Assassinato no campo de golfe',
-        'gender': 'Mistério',
-        'author': 'Agatha Christie',
-        'rate': 3
-    },
-    {
-        'title': 'Guia Suno de contabilidade para investidores',
-        'gender': 'Contabilidade',
-        'author': 'Jean Tosetto',
-        'rate': 1.5
-    },
-    {
-        'title': 'A espada do destino',
-        'gender': 'Fantasia',
-        'author': 'Andrzej Sapkowski',
-        'rate': 5
-    },
-    {
-        'title': 'O misterioso Sr. Quin',
-        'gender': 'Mistério',
-        'author': 'Agatha Christie',
-        'rate': 2.5
-    }
-]
-*/
-
 export default function Index() {
     const { getDropdownIsHide, toggleDropdownVisibility } = useDropdownsHide(2)
     const [filter, setFilter] = useState()
     const [filterDropdownTitle, setFilterDropdownTitle] = useState('Todos os livros')
     const [bookList, setBookList] = useState([])
-    
+
 
     useEffect(() => {
         axios.get(baseURL)
@@ -92,9 +33,9 @@ export default function Index() {
     }, [])
 
 
-    const mapBooks = (book, index) => {
+    const mapBooks = book => {
         return <BookComponent
-            key={index}
+            key={book.id}
             title={book.title}
             gender={book.gender}
             author={book.author}
@@ -104,21 +45,26 @@ export default function Index() {
 
     function renderBooks(books, filter) {
         if (filter === 'read') {
-            const filteredBooks = books.filter(book => book.read === true)
-            if (!filteredBooks.lenght) {
+            const filteredBooks = books.filter(book => book.toRead === false)
+            if (!filteredBooks.length) {
+
                 return 'Nenhum livro aqui. Adicione novos livros'
             } else {
                 return filteredBooks.map(mapBooks)
             }
         } else if (filter === 'notread') {
-            const filteredBooks = books.filter(book => book.read === false)
-            if (!filteredBooks.lenght) {
+            const filteredBooks = books.filter(book => book.toRead === true)
+            if (!filteredBooks.length) {
                 return 'Nenhum livro aqui. Adicione novos livros'
             } else {
                 return filteredBooks.map(mapBooks)
             }
         } else {
-            return books.map(mapBooks)
+            if (!books.length) {
+                return 'Nenhum livro aqui. Adicione novos livros'
+            } else {
+                return books.map(mapBooks)
+            }
         }
     }
 

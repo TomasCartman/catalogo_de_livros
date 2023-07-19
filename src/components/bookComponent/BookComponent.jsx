@@ -21,7 +21,6 @@ export default function BookComponent({ title, gender, author, rate }) {
         } else {
             return 'Para ler'
         }
-
     }
     
     return (
