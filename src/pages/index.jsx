@@ -9,9 +9,13 @@ import { BiSolidBookAdd } from 'react-icons/bi'
 import styles from '@/styles/index.module.css'
 import Head from 'next/head'
 import useDropdownsHide from '@/hooks/useDropDownsHide'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '@/components/button/Button'
+import axios from 'axios'
 
+const baseURL = 'api/books'
+
+/*
 const bookList = [
     {
         'title': 'O mistério Sittaford',
@@ -68,11 +72,25 @@ const bookList = [
         'rate': 2.5
     }
 ]
+*/
 
 export default function Index() {
     const { getDropdownIsHide, toggleDropdownVisibility } = useDropdownsHide(2)
     const [filter, setFilter] = useState()
     const [filterDropdownTitle, setFilterDropdownTitle] = useState('Todos os livros')
+    const [bookList, setBookList] = useState([])
+    
+
+    useEffect(() => {
+        axios.get(baseURL)
+            .then(resp => resp.data)
+            .then(resp => resp.books)
+            .then(booksArray => {
+                const books = booksArray.map(book => book)
+                setBookList(books)
+            })
+    }, [])
+
 
     const mapBooks = (book, index) => {
         return <BookComponent

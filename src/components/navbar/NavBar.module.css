@@ -21,3 +21,9 @@
 .icon:hover {
     color: var(--hover-contrast-color);
 }
+
+@media (max-width: 770px) {
+    .navbar {
+        padding: 10px;
+    }
+}
