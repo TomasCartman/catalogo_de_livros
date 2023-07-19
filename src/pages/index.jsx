@@ -36,10 +36,12 @@ export default function Index() {
     const mapBooks = book => {
         return <BookComponent
             key={book.id}
+            id={book.id}
             title={book.title}
             gender={book.gender}
             author={book.author}
             rate={book.rate}
+            toRead={book.toRead}
         />
     }
 

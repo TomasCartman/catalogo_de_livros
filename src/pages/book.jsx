@@ -9,8 +9,9 @@ import { BiSolidBookAdd } from 'react-icons/bi'
 import useDropdownHide from "@/hooks/useDropdownHide"
 import Head from "next/head"
 import SwitchButton from '@/components/button/SwitchButton'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 
 const baseURL = 'api/book'
@@ -22,9 +23,35 @@ export default function Book() {
     const [gender, setGender] = useState('')
     const [author, setAuthor] = useState('')
     const [rate, setRate] = useState(0)
+    const [edit, setEdit] = useState(false)
+    const router = useRouter()
+
+    useEffect(() => {
+        test()
+    }, [])
+
+    function test() {
+        const query = router.query
+        if (Object.keys(query).length > 0) { // EDIT BOOK
+            const book = JSON.parse(query.book)
+            console.log(book)
+            setEdit(true)
+
+            setTitle(book.title)
+            setGender(book.gender)
+            setAuthor(book.author)
+            setSwitchButtonActive(book.toRead)
+            if (!book.toRead) {
+                setRate(book.rate)
+            }
+        } else { // ADD BOOK
+
+        }
+    }
+
 
     function addBook() {
-        if(switchButtonActive) {
+        if (switchButtonActive) {
             const book = {
                 title,
                 gender,
@@ -96,9 +123,9 @@ export default function Book() {
                     <div className={styles.formcontainer}>
                         <div className={styles.formdiv}>
                             <label className={styles.label}>Título</label>
-                            <input 
-                                type="text" 
-                                className={styles.input} 
+                            <input
+                                type="text"
+                                className={styles.input}
                                 placeholder='Título'
                                 value={title}
                                 onChange={e => setTitle(e.target.value)}
@@ -106,9 +133,9 @@ export default function Book() {
                         </div>
                         <div className={styles.formdiv}>
                             <label className={styles.label}>Gênero</label>
-                            <input 
-                                type="text" 
-                                className={styles.input} 
+                            <input
+                                type="text"
+                                className={styles.input}
                                 placeholder='Gênero'
                                 value={gender}
                                 onChange={e => setGender(e.target.value)}
@@ -116,9 +143,9 @@ export default function Book() {
                         </div>
                         <div className={`${styles.formdiv} ${switchButtonActive ? styles.formjustifystart : ''}`}>
                             <label className={styles.label}>Autor</label>
-                            <input 
-                                type="text" 
-                                className={styles.input} 
+                            <input
+                                type="text"
+                                className={styles.input}
                                 placeholder='Autor'
                                 value={author}
                                 onChange={e => setAuthor(e.target.value)}
@@ -126,12 +153,12 @@ export default function Book() {
                         </div>
                         <div className={`${styles.formdiv} ${switchButtonActive ? styles.hide : ''}`}>
                             <label className={styles.label}>Nota</label>
-                            <input 
-                                type="number" 
-                                step={0.5} 
-                                min={0} 
-                                max={5} 
-                                className={styles.input} 
+                            <input
+                                type="number"
+                                step={0.5}
+                                min={0}
+                                max={5}
+                                className={styles.input}
                                 placeholder='Nota (min: 0, max: 5)'
                                 value={rate}
                                 onChange={e => setRate(e.target.value)}
@@ -140,8 +167,17 @@ export default function Book() {
                     </div>
 
                     <div className={styles.buttonflex}>
-                        <Button onClick={addBook}>Adicionar</Button>
-                        <Button contrast onClick={tests}>Cancelar</Button>
+                        {edit === true ? (
+                            <>
+                                <Button onClick={addBook}>Atualizar</Button>
+                                <Button contrast onClick={tests}>Deletar</Button>
+                            </>
+                        ) : (
+                            <>
+                                <Button onClick={addBook}>Adicionar</Button>
+                                <Button contrast onClick={tests}>Cancelar</Button>
+                            </>
+                        )}
                     </div>
                 </div>
             </main>
