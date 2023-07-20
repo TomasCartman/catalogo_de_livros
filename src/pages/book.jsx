@@ -6,6 +6,7 @@ import DropdownMenu from '@/components/dropdown/DropdownMenu'
 import Button from '@/components/button/Button'
 import useDropdownHide from "@/hooks/useDropdownHide"
 import SwitchButton from '@/components/button/SwitchButton'
+import Alert from '@/components/Alert/Alert'
 import { FaBook } from 'react-icons/fa'
 import { BiSolidBookAdd } from 'react-icons/bi'
 import Head from "next/head"
@@ -25,11 +26,19 @@ export default function Book() {
     const [rate, setRate] = useState(0)
     const [id, setId] = useState('')
     const [edit, setEdit] = useState(false)
+    const [displayAlert, setDisplayAlert] = useState(false)
+    const [alert, setAlert] = useState()
     const router = useRouter()
 
     useEffect(() => {
         verifyIfItIsEditOrAddBook()
     }, [])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setDisplayAlert(false)
+        }, 12000)
+    }, [displayAlert])
 
     function verifyIfItIsEditOrAddBook() {
         const query = router.query
@@ -65,13 +74,20 @@ export default function Book() {
         return book
     }
 
-
     function addBook() {
         const book = bookCreator()
 
         axios.post(baseURL, book)
-            .then(resp => console.log(resp))
-            .catch(err => console.log(err))
+            .then(resp => {
+                console.log(resp.status) // Make Alert based on status
+                setAlert(makeAlert(title, 'successAdd'))
+                setDisplayAlert(true)
+            })
+            .catch(err => {
+                console.log(err)
+                setAlert(makeAlert(title, 'error'))
+                setDisplayAlert(true)
+            })
         resetForm()
     }
 
@@ -79,15 +95,31 @@ export default function Book() {
         const book = bookCreator()
 
         axios.put(baseURL, book)
-            .then(resp => console.log(resp))
-            .catch(err => console.log(err))
+            .then(resp => {
+                console.log(resp)
+                setAlert(makeAlert(title, 'successUpdate')) // NOT WORKING?
+                setDisplayAlert(true)
+            })
+            .catch(err => {
+                console.log(err)
+                setAlert(makeAlert(title, 'error'))
+                setDisplayAlert(true)
+            })
         resetForm()
     }
 
     function deleteBook() {
         axios.delete(baseURL, { data: id })
-            .then(resp => console.log(resp))
-            .catch(err => console.log(err))
+            .then(resp => {
+                console.log(resp)
+                setAlert(makeAlert(title, 'successDelete'))
+                setDisplayAlert(true)
+            })
+            .catch(err => {
+                console.log(err)
+                setAlert(makeAlert(title, 'error'))
+                setDisplayAlert(true)
+            })
         resetForm()
     }
 
@@ -101,12 +133,19 @@ export default function Book() {
         setSwitchButtonActive(false)
     }
 
+    function makeAlert(title, msg) {
+        return (
+            <Alert title={title} msg={msg} />
+        )
+    }
+
     return (
         <>
             <Head>
                 <title>Catálogo_de_livros: Adicionar livro</title>
             </Head>
             <header>
+                {displayAlert ? alert : ''}
                 <NavBar toggleDropdown={toggleDropdownVisibility}>Catálogo_de_livros</NavBar>
                 <DropdownMenu hideDropdown={isDropdownHide} position='header'>
                     <DropdownItem
