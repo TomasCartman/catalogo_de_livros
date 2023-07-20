@@ -1,4 +1,4 @@
-import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, deleteDoc } from "firebase/firestore";
 import firebaseApp from '@/backend/db/index'
 
 export default function repository() {
@@ -30,21 +30,22 @@ export default function repository() {
 
     async function addBook(book) {
         const docRef = await addDoc(booksRef, book)
-        console.log(docRef.id)
         return docRef.id
     }
 
     async function deleteBook(id) {
-
+        await deleteDoc(doc(booksRef, id))
     }
 
-    async function updateBook(id) {
-        
+    async function updateBook(id, book) {
+        await setDoc(doc(booksRef, id), book)
     }
 
     return {
         getAllBooks,
         getBook,
-        addBook
+        addBook,
+        updateBook,
+        deleteBook
     }
 }

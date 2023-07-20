@@ -1,16 +1,16 @@
+import '@/styles/globals.css'
+import styles from '@/styles/index.module.css'
 import BookComponent from '@/components/bookComponent/BookComponent'
 import DropdownItem from '@/components/dropdown/DropdownItem'
 import DropdownMenu from '@/components/dropdown/DropdownMenu'
 import NavBar from '@/components/navbar/NavBar'
 import PageUp from '@/components/pageUp/PageUp'
-import '@/styles/globals.css'
+import Button from '@/components/button/Button'
+import useDropdownsHide from '@/hooks/useDropDownsHide'
 import { FaBook } from 'react-icons/fa'
 import { BiSolidBookAdd } from 'react-icons/bi'
-import styles from '@/styles/index.module.css'
 import Head from 'next/head'
-import useDropdownsHide from '@/hooks/useDropDownsHide'
 import { useEffect, useState } from 'react'
-import Button from '@/components/button/Button'
 import axios from 'axios'
 
 const baseURL = 'api/books'
@@ -48,25 +48,19 @@ export default function Index() {
     function renderBooks(books, filter) {
         if (filter === 'read') {
             const filteredBooks = books.filter(book => book.toRead === false)
-            if (!filteredBooks.length) {
 
-                return 'Nenhum livro aqui. Adicione novos livros'
-            } else {
-                return filteredBooks.map(mapBooks)
-            }
+            if (!filteredBooks.length) return 'Nenhum livro aqui. Adicione novos livros'
+            else return filteredBooks.map(mapBooks)
+
         } else if (filter === 'notread') {
             const filteredBooks = books.filter(book => book.toRead === true)
-            if (!filteredBooks.length) {
-                return 'Nenhum livro aqui. Adicione novos livros'
-            } else {
-                return filteredBooks.map(mapBooks)
-            }
+
+            if (!filteredBooks.length) return 'Nenhum livro aqui. Adicione novos livros'
+            else return filteredBooks.map(mapBooks)
+
         } else {
-            if (!books.length) {
-                return 'Nenhum livro aqui. Adicione novos livros'
-            } else {
-                return books.map(mapBooks)
-            }
+            if (!books.length) return 'Nenhum livro aqui. Adicione novos livros'
+            else return books.map(mapBooks)
         }
     }
 

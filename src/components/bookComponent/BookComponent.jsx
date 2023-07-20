@@ -10,9 +10,9 @@ export default function BookComponent({ title, gender, author, rate, toRead, id 
         const link = '/book'
         const book = {
             id,
-            title, 
-            gender, 
-            author, 
+            title,
+            gender,
+            author,
             rate,
             toRead
         }
@@ -24,32 +24,30 @@ export default function BookComponent({ title, gender, author, rate, toRead, id 
     }
 
     function handleRate() { // Make this function better
-        if(rate) {
+        if (rate) {
             rate = parseFloat(rate, 10)
             const fullStarsNumber = parseInt(rate, 10)
-            const hasHalfStars =  !Number.isInteger(rate) && fullStarsNumber < 5
-            const emptyStarsNumber = parseInt(5-rate, 10)
-            
+            const hasHalfStars = !Number.isInteger(rate) && fullStarsNumber < 5
+            const emptyStarsNumber = parseInt(5 - rate, 10)
+
             const starsArray = []
-            for(let i = 0; i < fullStarsNumber; i++) {
-                starsArray.push(<BsStarFill key={title+i}/>)
+            for (let i = 0; i < fullStarsNumber; i++) {
+                starsArray.push(<BsStarFill key={title + i} />)
             }
-            if(hasHalfStars) starsArray.push(<BsStarHalf key={title+8} />)
-            for(let i = 0; i < emptyStarsNumber; i++) {
-                starsArray.push(<BsStar key={title+((i+1)*10)} />)
+            if (hasHalfStars) starsArray.push(<BsStarHalf key={title + 8} />)
+            for (let i = 0; i < emptyStarsNumber; i++) {
+                starsArray.push(<BsStar key={title + ((i + 1) * 10)} />)
             }
             return starsArray
-        } else {
-            return 'Para ler'
-        }
+        } else return 'Para ler'
     }
-    
+
     return (
         <div className={styles.bookcontainer}>
             <div className={styles.flexbetween}>
                 <h3 className={styles.title}>{title}</h3>
-                <FiEdit 
-                    size={20} 
+                <FiEdit
+                    size={20}
                     className={styles.icon}
                     onClick={handleEdit}
                 />

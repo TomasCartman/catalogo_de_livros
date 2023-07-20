@@ -4,14 +4,14 @@ import NavBar from "@/components/navbar/NavBar"
 import DropdownItem from '@/components/dropdown/DropdownItem'
 import DropdownMenu from '@/components/dropdown/DropdownMenu'
 import Button from '@/components/button/Button'
+import useDropdownHide from "@/hooks/useDropdownHide"
+import SwitchButton from '@/components/button/SwitchButton'
 import { FaBook } from 'react-icons/fa'
 import { BiSolidBookAdd } from 'react-icons/bi'
-import useDropdownHide from "@/hooks/useDropdownHide"
 import Head from "next/head"
-import SwitchButton from '@/components/button/SwitchButton'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useRouter } from 'next/router'
 
 
 const baseURL = 'api/book'
@@ -23,14 +23,15 @@ export default function Book() {
     const [gender, setGender] = useState('')
     const [author, setAuthor] = useState('')
     const [rate, setRate] = useState(0)
+    const [id, setId] = useState('')
     const [edit, setEdit] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
-        test()
+        verifyIfItIsEditOrAddBook()
     }, [])
 
-    function test() {
+    function verifyIfItIsEditOrAddBook() {
         const query = router.query
         if (Object.keys(query).length > 0) { // EDIT BOOK
             const book = JSON.parse(query.book)
@@ -41,50 +42,81 @@ export default function Book() {
             setGender(book.gender)
             setAuthor(book.author)
             setSwitchButtonActive(book.toRead)
+            setId(book.id)
             if (!book.toRead) {
                 setRate(book.rate)
             }
-        } else { // ADD BOOK
-
         }
     }
 
 
     function addBook() {
+        let book = {}
         if (switchButtonActive) {
-            const book = {
+            book = {
                 title,
                 gender,
                 author,
-                toRead: true
+                toRead: switchButtonActive
             }
-            axios.post(baseURL, book)
-                .then(resp => console.log(resp))
         } else {
-            const book = {
+            book = {
                 title,
                 gender,
                 author,
                 rate,
-                toRead: false
+                toRead: switchButtonActive
             }
-            axios.post(baseURL, book)
-                .then(resp => console.log(resp))
         }
 
+        axios.post(baseURL, book)
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
+        resetForm()
+    }
+
+    function updateBook() {
+        let book = {}
+        if (switchButtonActive) {
+            book = {
+                id,
+                title,
+                gender,
+                author,
+                toRead: switchButtonActive
+            }
+        } else {
+            book = {
+                id,
+                title,
+                gender,
+                author,
+                rate,
+                toRead: switchButtonActive
+            }
+        }
+
+        axios.put(baseURL, book)
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
+        resetForm()
+    }
+
+    function deleteBook() {
+        axios.delete(baseURL, { data: id })
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
         resetForm()
     }
 
     function resetForm() {
+        setEdit(false)
+        setId(null)
         setTitle('')
         setGender('')
         setAuthor('')
         setRate(0)
         setSwitchButtonActive(false)
-    }
-
-    function tests() {
-        dbManager()
     }
 
     return (
@@ -169,19 +201,18 @@ export default function Book() {
                     <div className={styles.buttonflex}>
                         {edit === true ? (
                             <>
-                                <Button onClick={addBook}>Atualizar</Button>
-                                <Button contrast onClick={tests}>Deletar</Button>
+                                <Button onClick={updateBook}>Atualizar</Button>
+                                <Button contrast onClick={deleteBook}>Deletar</Button>
                             </>
                         ) : (
                             <>
                                 <Button onClick={addBook}>Adicionar</Button>
-                                <Button contrast onClick={tests}>Cancelar</Button>
+                                <Button contrast onClick={resetForm}>Cancelar</Button>
                             </>
                         )}
                     </div>
                 </div>
             </main>
         </>
-
     )
 }
