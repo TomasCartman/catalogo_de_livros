@@ -6,14 +6,13 @@ import DropdownMenu from '@/components/dropdown/DropdownMenu'
 import Button from '@/components/button/Button'
 import useDropdownHide from "@/hooks/useDropdownHide"
 import SwitchButton from '@/components/button/SwitchButton'
-import Alert from '@/components/Alert/Alert'
+import Alert from '@/components/alert/Alert'
 import { FaBook } from 'react-icons/fa'
 import { BiSolidBookAdd } from 'react-icons/bi'
 import Head from "next/head"
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-
 
 const baseURL = 'api/book'
 
@@ -44,9 +43,8 @@ export default function Book() {
         const query = router.query
         if (Object.keys(query).length > 0) { // EDIT BOOK
             const book = JSON.parse(query.book)
-            console.log(book)
-            setEdit(true)
 
+            setEdit(true)
             setTitle(book.title)
             setGender(book.gender)
             setAuthor(book.author)
@@ -79,9 +77,13 @@ export default function Book() {
 
         axios.post(baseURL, book)
             .then(resp => {
-                console.log(resp.status) // Make Alert based on status
-                setAlert(makeAlert(title, 'successAdd'))
-                setDisplayAlert(true)
+                if (resp.status === 201) {
+                    setAlert(makeAlert(title, 'successAdd'))
+                    setDisplayAlert(true)
+                } else {
+                    setAlert(makeAlert(title, 'error'))
+                    setDisplayAlert(true)
+                }
             })
             .catch(err => {
                 console.log(err)
@@ -97,8 +99,13 @@ export default function Book() {
         axios.put(baseURL, book)
             .then(resp => {
                 console.log(resp)
-                setAlert(makeAlert(title, 'successUpdate')) // NOT WORKING?
-                setDisplayAlert(true)
+                if (resp.status === 200) {
+                    setAlert(makeAlert(title, 'successUpdate'))
+                    setDisplayAlert(true)
+                } else {
+                    setAlert(makeAlert(title, 'error'))
+                    setDisplayAlert(true)
+                }
             })
             .catch(err => {
                 console.log(err)
@@ -111,9 +118,13 @@ export default function Book() {
     function deleteBook() {
         axios.delete(baseURL, { data: id })
             .then(resp => {
-                console.log(resp)
-                setAlert(makeAlert(title, 'successDelete'))
-                setDisplayAlert(true)
+                if (resp.status === 200) {
+                    setAlert(makeAlert(title, 'successDelete'))
+                    setDisplayAlert(true)
+                } else {
+                    setAlert(makeAlert(title, 'error'))
+                    setDisplayAlert(true)
+                }
             })
             .catch(err => {
                 console.log(err)

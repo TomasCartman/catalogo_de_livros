@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         const book = req.body
         try {
             await updateBook(book.id, book)
-            res.status(200)
+            res.status(200).json({ resp: req.body })
         } catch (e) {
             res.status(500).json({ error: 'Server error', errorMsg: e })
         }
