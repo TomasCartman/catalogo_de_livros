@@ -49,25 +49,25 @@ export default function Book() {
         }
     }
 
+    function bookCreator() {
+        let book = {}
+        if (edit) {
+            if (switchButtonActive)
+                book = { id, title, gender, author, toRead: switchButtonActive }
+            else
+                book = { id, title, gender, author, rate, toRead: switchButtonActive }
+        } else {
+            if (switchButtonActive)
+                book = { title, gender, author, toRead: switchButtonActive }
+            else
+                book = { title, gender, author, rate, toRead: switchButtonActive }
+        }
+        return book
+    }
+
 
     function addBook() {
-        let book = {}
-        if (switchButtonActive) {
-            book = {
-                title,
-                gender,
-                author,
-                toRead: switchButtonActive
-            }
-        } else {
-            book = {
-                title,
-                gender,
-                author,
-                rate,
-                toRead: switchButtonActive
-            }
-        }
+        const book = bookCreator()
 
         axios.post(baseURL, book)
             .then(resp => console.log(resp))
@@ -76,25 +76,7 @@ export default function Book() {
     }
 
     function updateBook() {
-        let book = {}
-        if (switchButtonActive) {
-            book = {
-                id,
-                title,
-                gender,
-                author,
-                toRead: switchButtonActive
-            }
-        } else {
-            book = {
-                id,
-                title,
-                gender,
-                author,
-                rate,
-                toRead: switchButtonActive
-            }
-        }
+        const book = bookCreator()
 
         axios.put(baseURL, book)
             .then(resp => console.log(resp))
@@ -111,7 +93,7 @@ export default function Book() {
 
     function resetForm() {
         setEdit(false)
-        setId(null)
+        setId('')
         setTitle('')
         setGender('')
         setAuthor('')
