@@ -3,14 +3,21 @@ import { PiSquaresFourFill } from 'react-icons/pi'
 import windowUtils from '@/utils/windowUtils'
 import SearchComponent from '../search/SearchComponent'
 
-export default function NavBar({ children, toggleDropdown }) {
+export default function NavBar({ children, toggleDropdown, searchValue, onChangeSearchValue, onKeyDown, displaySearch }) {
     return (
         <nav className={styles.navbar}>
             <h2
                 className={styles.pagetitle}
                 onClick={windowUtils.goToTopOfPage}>{children}
             </h2>
-            <SearchComponent />
+
+            {displaySearch ? (
+                <SearchComponent
+                    searchValue={searchValue}
+                    onChangeSearchValue={onChangeSearchValue}
+                    onKeyDown={onKeyDown}
+                />
+            ) : false}
 
             <PiSquaresFourFill
                 size={25}

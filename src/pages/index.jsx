@@ -12,7 +12,6 @@ import { BiSolidBookAdd } from 'react-icons/bi'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import SearchComponent from '@/components/search/SearchComponent'
 
 const baseURL = 'api/books'
 
@@ -21,7 +20,8 @@ export default function Index() {
     const [filter, setFilter] = useState()
     const [filterDropdownTitle, setFilterDropdownTitle] = useState('Todos os livros')
     const [bookList, setBookList] = useState([])
-
+    const [bookListServer, setBookListServer] = useState([])
+    const [searchValue, setSearchValue] = useState('')
 
     useEffect(() => {
         axios.get(baseURL)
@@ -29,11 +29,12 @@ export default function Index() {
             .then(resp => resp.books)
             .then(booksArray => {
                 const books = booksArray.map(book => book)
+                setBookListServer(books)
                 setBookList(books)
             })
     }, [])
 
-
+    const filterBookByValue = (book, value) => book.title.toLowerCase().includes(value.toLowerCase())
     const mapBooks = book => {
         return <BookComponent
             key={book.id}
@@ -83,13 +84,36 @@ export default function Index() {
         toggleDropdownVisibility(1)
     }
 
+    function onChangeSearchValue(searchString) {
+        setSearchValue(searchString)
+        if(searchString === '') {
+            setBookList([...bookListServer])
+        }
+    }
+
+    function searchBook(event) {
+        const key = event.code
+        const value = event.currentTarget.value
+        if (key === 'Enter' || key === 'NumpadEnter') {
+            let books = [...bookList]
+            books = books.filter(book => filterBookByValue(book, value))
+            setBookList([...books])
+        } 
+    }
+
     return (
         <>
             <Head>
                 <title>Catálogo_de_livros</title>
             </Head>
             <header>
-                <NavBar toggleDropdown={() => toggleDropdownVisibility(0)}>Catálogo_de_livros</NavBar>
+                <NavBar 
+                    toggleDropdown={() => toggleDropdownVisibility(0)}
+                    displaySearch
+                    searchValue={searchValue}
+                    onChangeSearchValue={onChangeSearchValue}
+                    onKeyDown={searchBook}
+                >Catálogo_de_livros</NavBar>
                 <DropdownMenu hideDropdown={getDropdownIsHide(0)} position='header'>
                     <DropdownItem
                         itemLabel='Livros'
