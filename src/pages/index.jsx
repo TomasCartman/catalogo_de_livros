@@ -93,8 +93,9 @@ export default function Index() {
 
     function searchBook(event) {
         const key = event.code
+        const keyWhich = event.which
         const value = event.currentTarget.value
-        if (key === 'Enter' || key === 'NumpadEnter') {
+        if (key === 'Enter' || key === 'NumpadEnter' || keyWhich === 13) {
             let books = [...bookList]
             books = books.filter(book => filterBookByValue(book, value))
             setBookList([...books])
@@ -113,6 +114,7 @@ export default function Index() {
                     searchValue={searchValue}
                     onChangeSearchValue={onChangeSearchValue}
                     onKeyDown={searchBook}
+                    flexEnd
                 >Catálogo_de_livros</NavBar>
                 <DropdownMenu hideDropdown={getDropdownIsHide(0)} position='header'>
                     <DropdownItem

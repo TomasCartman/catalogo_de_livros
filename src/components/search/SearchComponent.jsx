@@ -13,6 +13,7 @@ export default function SearchComponent({ searchValue, onChangeSearchValue, onKe
                 value={searchValue}
                 onChange={e => onChangeSearchValue(e.target.value)}
                 onKeyDown={e => onKeyDown(e)} />
+            <button type='submit' className={styles.submit}></button>
         </div>
     )
 }

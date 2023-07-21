@@ -157,7 +157,7 @@ export default function Book() {
             </Head>
             <header>
                 {displayAlert ? alert : ''}
-                <NavBar toggleDropdown={toggleDropdownVisibility}>Catálogo_de_livros</NavBar>
+                <NavBar toggleDropdown={toggleDropdownVisibility} displayTitle>Catálogo_de_livros</NavBar>
                 <DropdownMenu hideDropdown={isDropdownHide} position='header'>
                     <DropdownItem
                         itemLabel='Livros'

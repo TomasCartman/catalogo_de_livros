@@ -25,10 +25,17 @@
 @media (max-width: 770px) {
     .navbar {
         padding: 10px;
+    }
+
+    .flexend {
         justify-content: flex-end;
     }
 
     .pagetitle {
         display: none;
+    }
+
+    .forcedisplay {
+        display: block;
     }
 }

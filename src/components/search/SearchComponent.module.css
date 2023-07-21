@@ -11,6 +11,13 @@
     font-size: 1.2rem;
 }
 
+.submit {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    left: -9999px;
+}
+
 
 @media (max-width: 770px) {
     .container {
