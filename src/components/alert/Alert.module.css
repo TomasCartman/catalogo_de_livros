@@ -1,0 +1,42 @@
+.alertcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 1px 1px 1px #000;
+}
+
+.title {
+    font-style: italic;
+    font-weight: bold;
+}
+
+@keyframes showsup {
+    0% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.alertcontainer {
+    animation: showsup 10s forwards;
+}
