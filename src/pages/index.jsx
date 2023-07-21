@@ -12,6 +12,7 @@ import { BiSolidBookAdd } from 'react-icons/bi'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import SearchComponent from '@/components/search/SearchComponent'
 
 const baseURL = 'api/books'
 

@@ -1,6 +1,7 @@
 import styles from './Alert.module.css'
 
 export default function Alert(props) {
+    
 function successAdd() {
         return (
             <>

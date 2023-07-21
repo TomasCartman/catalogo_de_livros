@@ -25,5 +25,10 @@
 @media (max-width: 770px) {
     .navbar {
         padding: 10px;
+        justify-content: flex-end;
+    }
+
+    .pagetitle {
+        display: none;
     }
 }

@@ -1,0 +1,19 @@
+.container {
+    position: fixed;
+    width: 30%;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
+.input {
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+
+@media (max-width: 770px) {
+    .container {
+        width: 60%;
+    }
+}
