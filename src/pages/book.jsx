@@ -5,8 +5,8 @@ import DropdownItem from '@/components/dropdown/DropdownItem'
 import DropdownMenu from '@/components/dropdown/DropdownMenu'
 import Button from '@/components/button/Button'
 import useDropdownHide from "@/hooks/useDropdownHide"
-import SwitchButton from '@/components/button/SwitchButton'
 import Alert from '@/components/alert/Alert'
+import SwitchButton from '@/components/button/SwitchButton'
 import { FaBook } from 'react-icons/fa'
 import { BiSolidBookAdd } from 'react-icons/bi'
 import Head from "next/head"
